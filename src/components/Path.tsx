@@ -52,12 +52,12 @@ const Path = () => {
     }, [useLocation().pathname])
 
     return (
-        <div className='p-[5px] flex flex-row'>
+        <div className='p-[5px] flex flex-row text-lg'>
             {
                 path?.map((component, index) => {
                     return (
                         <div key={index} className='fc flex-row'>
-                            <NavLink to={(component instanceof Object ? component.link : "/")} className="underline hover:text-main underline-offset-2">
+                            <NavLink to={(component instanceof Object ? component.link : "/")} className="hover:text-main hover:underline">
                                 {component instanceof Object ? component.name : component}
                             </NavLink>
                             {

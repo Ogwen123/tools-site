@@ -1,4 +1,4 @@
-import React from 'react'
+//import React from 'react'
 import { Outlet, useOutletContext } from 'react-router-dom'
 import { ToolObject } from './global/types'
 
@@ -33,7 +33,7 @@ export const tools: ToolObject = {
 
 const App = () => {
     return (
-        <div className='min-h-100vh'>
+        <div className='min-h-[100vh]'>
             <Outlet context={{ tools }} />
         </div>
     )

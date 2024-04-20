@@ -1,4 +1,4 @@
-import React from 'react'
+//import React from 'react'
 import { useTools } from '../../App'
 import { NavLink } from 'react-router-dom'
 
@@ -7,12 +7,12 @@ const Home = () => {
     const { tools } = useTools()
 
     return (
-        <div className='flex flex-row h-full'>
+        <div className='flex flex-row min-h-[100vh]'>
             {
                 Object.keys(tools).map((categoryKey, index) => {
                     const category = tools[categoryKey]
                     return (
-                        <div key={index} className='rounded-md p-[10px] m-[10px] bg-bgdark min-w-[25%] min-h-[calc(100%/3)]'>
+                        <div key={index} className='rounded-md p-[10px] m-[10px] bg-bgdark min-w-[calc(25%-20px)] h-[300px]'>
                             {category.name}
                             <div className='flex flex-row'>
                                 <div>
