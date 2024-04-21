@@ -20,7 +20,7 @@ const SideBar = () => {
 
     return (
         <div className='w-[15vw] bg-bgdark p-[10px]'>
-            <NavLink to="/" className="text-3xl text-main w-full fc my-[10px]">Tools</NavLink>
+            <NavLink to="/" className="text-3xl text-main w-full fc mb-[10px] py-[10px] bg-bg rounded-md">Tools</NavLink>
             {page ?
                 <div>
                     {page.name}
@@ -47,7 +47,7 @@ const SideBar = () => {
                                 Object.keys(page.tools).map((toolKey, index) => {
                                     const tool = page.tools[toolKey]
                                     return (
-                                        <div className='h-[40px] flex items-center'>
+                                        <div className='h-[40px] flex items-center' key={index}>
                                             <NavLink
                                                 key={index}
                                                 to={tool.link}

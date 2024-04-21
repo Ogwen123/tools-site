@@ -52,22 +52,24 @@ const Path = () => {
     }, [useLocation().pathname])
 
     return (
-        <div className='p-[5px] flex flex-row text-lg'>
-            {
-                path?.map((component, index) => {
-                    return (
-                        <div key={index} className='fc flex-row'>
-                            <NavLink to={(component instanceof Object ? component.link : "/")} className="hover:text-main hover:underline">
-                                {component instanceof Object ? component.name : component}
-                            </NavLink>
-                            {
-                                index !== path.length - 1 &&
-                                <ChevronRightIcon className='h-5 w-5' />
-                            }
-                        </div>
-                    )
-                })
-            }
+        <div className='p-[10px]'>
+            <div className='p-[5px] flex flex-row text-lg bg-main rounded-md'>
+                {
+                    path?.map((component, index) => {
+                        return (
+                            <div key={index} className='fc flex-row'>
+                                <NavLink to={(component instanceof Object ? component.link : "/")} className=" hover:underline">
+                                    {component instanceof Object ? component.name : component}
+                                </NavLink>
+                                {
+                                    index !== path.length - 1 &&
+                                    <ChevronRightIcon className='h-5 w-5' />
+                                }
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }
