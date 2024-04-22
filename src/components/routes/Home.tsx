@@ -37,9 +37,8 @@ const Home = () => {
                                         Object.keys(category.tools).map((toolKey, index) => {
                                             const tool = category.tools[toolKey]
                                             return (
-                                                <div className='h-[40px] flex items-center'>
+                                                <div className='h-[40px] flex items-center' key={index}>
                                                     <NavLink
-                                                        key={index}
                                                         to={tool.link}
                                                         className="underline hover:text-main underline-offset-2"
                                                     >{tool.name}</NavLink>

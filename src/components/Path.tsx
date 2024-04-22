@@ -52,8 +52,8 @@ const Path = () => {
     }, [useLocation().pathname])
 
     return (
-        <div className='p-[10px]'>
-            <div className='p-[5px] flex flex-row text-lg bg-main rounded-md'>
+        <div className='p-[10px] flex'>
+            <div className='py-[5px] px-[10px] flex flex-row shrink text-lg bg-main rounded-md'>
                 {
                     path?.map((component, index) => {
                         return (

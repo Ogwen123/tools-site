@@ -115,8 +115,6 @@ export const binaryToDenary = (binary: string, twosComp: boolean): number | fals
 export const denaryToHex = (denaryStr: string): string | false => {
     if (validateInput(denaryStr, "DEN") === false) return false
 
-    console.log("huh")
-
     const convert = (number: number) => { // convert a denary number under 16 to hex
         if (number >= 16) return
         return ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"][number]
@@ -154,8 +152,4 @@ export const hexToBinary = (hex: string): string | false => {
     }
 
     return binary
-}
-
-export const test = (testRules: [string, string, boolean?][], func: () => string | false) => {
-
 }

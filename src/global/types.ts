@@ -13,3 +13,5 @@ export type ToolCategory =
 export type ToolObject = {
     [id: string]: ToolCategory
 }
+
+export type _Alert = [string | [string, string], "SUCCESS" | "ERROR", boolean]

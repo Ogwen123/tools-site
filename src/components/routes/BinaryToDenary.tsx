@@ -1,10 +1,52 @@
-//import React from 'react'
+import React from 'react'
+import { binaryToDenary, denaryToBinary } from '../../utils/conversions'
+import { _Alert } from '../../global/types'
+import Alert, { alertReset } from '../Alert'
 
 const BinaryToDenary = () => {
+
+    const [binary, setBinary] = React.useState<string>("")
+    const [denary, setDenary] = React.useState<string>("")
+    const [tc, setTc] = React.useState<boolean>(false)
+    const [lastChanged, setLastChanged] = React.useState<"BIN" | "DEN">()
+    const [alert, setAlert] = React.useState<_Alert>(["Alert", "ERROR", false])
+
+
+    const convert = () => {
+        console.log("123")
+        if (lastChanged === "BIN") {
+            const denaryValue = binaryToDenary(binary, tc)
+
+            if (denaryValue === false) {
+                setAlert(["Invalid binary format.", "ERROR", true])
+                setTimeout(() => { setAlert(alertReset) }, 5000)
+                return
+            }
+
+            setDenary(denaryValue.toString())
+        } else {
+            const binaryValue = denaryToBinary(denary, tc)
+
+            if (binaryValue === false) {
+                setAlert(["Invalid denary.", "ERROR", true])
+                setTimeout(() => { setAlert(alertReset) }, 5000)
+                return
+            }
+
+            setBinary(binaryValue)
+        }
+    }
+
     return (
         <div className='flex fc flex-col'>
-            <div className='text-4xl mt-[100px]'>Binary to Hexidecimal</div>
+            <div className='text-4xl mt-[100px]'>Binary to Denary</div>
             <div className='w-2/5 mt-[30px] bg-bgdark rounded-md p-[10px]'>
+                <Alert
+                    content={alert[0] instanceof Array ? alert[0][1] : alert[0]}
+                    severity={alert[1]}
+                    show={alert[2]}
+                    title={alert[0] instanceof Array ? alert[0][0] : undefined}
+                />
                 <div className='my-[10px]'>
                     <div>Binary</div>
                     <input
@@ -18,14 +60,14 @@ const BinaryToDenary = () => {
                     ></input>
                 </div>
                 <div className='my-[10px]'>
-                    <div>Hex</div>
+                    <div>Denary</div>
                     <input
-                        value={hex}
+                        value={denary}
                         onChange={(e) => {
-                            setHex(e.target.value)
-                            setLastChanged("HEX")
+                            setDenary(e.target.value)
+                            setLastChanged("DEN")
                         }}
-                        placeholder='Hex'
+                        placeholder='Denary'
                         className='form-input bg-bg'
                     ></input>
                 </div>
