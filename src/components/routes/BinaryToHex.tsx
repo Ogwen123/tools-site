@@ -20,7 +20,7 @@ const BinaryToHex = () => {
             }
             const hexValue = denaryToHex(denary.toString())
             if (hexValue === false) {
-                setAlert(["An error occured while converting.", "ERROR", true])
+                setAlert(["An error occured while converting, this could be because of invalid binary.", "ERROR", true])
                 setTimeout(() => { setAlert(alertReset) }, 5000)
                 return
             }
