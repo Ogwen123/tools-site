@@ -15,3 +15,11 @@ export type ToolObject = {
 }
 
 export type _Alert = [string | [string, string], "SUCCESS" | "ERROR", boolean]
+
+export type PointData = {
+    id: number,
+    x: number,
+    y: number,
+    colour: string,
+    show: boolean
+}

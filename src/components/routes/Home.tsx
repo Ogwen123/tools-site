@@ -40,7 +40,7 @@ const Home = () => {
                                                 <div className='h-[40px] flex items-center' key={index}>
                                                     <NavLink
                                                         to={tool.link}
-                                                        className="underline hover:text-main underline-offset-2"
+                                                        className="hover:underline hover:text-main underline-offset-2"
                                                     >{tool.name}</NavLink>
                                                 </div>
                                             )
