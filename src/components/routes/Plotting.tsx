@@ -1,7 +1,16 @@
 import React from 'react'
 import { PointData } from '../../global/types'
+import PointListItem from '../visual/plotting/PointListItem'
 
 const Plotting = () => {
+
+    const defaultPoint = {
+        id: 0,
+        x: 0,
+        y: 0,
+        colour: "#009788",
+        show: true
+    }
 
     window.onload = () => {
         setParentWidth(document.getElementById("parent")?.offsetWidth! || 1600)
@@ -14,7 +23,11 @@ const Plotting = () => {
     }
 
     const addPoint = () => {
+        const point = defaultPoint
 
+        point.id = idTracker
+
+        setPoints((prevPoints) => ([...prevPoints, point]))
     }
 
     const [parentWidth, setParentWidth] = React.useState<number>(1600)
@@ -35,6 +48,15 @@ const Plotting = () => {
                     <button className="button" onClick={() => addPoint()}>
                         Add Point
                     </button>
+                    <div>
+                        {
+                            points.map((point, index) => {
+                                return (
+                                    <PointListItem pointData={point} updatePoint={updatePoint} key={index} />
+                                )
+                            })
+                        }
+                    </div>
                 </div>
 
                 <div
