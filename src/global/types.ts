@@ -1,12 +1,14 @@
 export type Tool = {
     name: string,
-    link: string
+    link: string,
+    show?: boolean
 }
 
 export type ToolCategory =
     {
         name: string,
-        tools: { [id: string]: Tool }
+        tools: { [id: string]: Tool },
+        show?: boolean
     }
 
 

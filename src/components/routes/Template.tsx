@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 import SideBar from '../SideBar'
 import Path from '../Path'
 
-const VisualTemplate = () => {
+const Template = () => {
     return (
         <div className="flex flex-row min-h-[100vh] w-full">
             <SideBar />
@@ -17,4 +17,4 @@ const VisualTemplate = () => {
     )
 }
 
-export default VisualTemplate
+export default Template

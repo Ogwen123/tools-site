@@ -13,6 +13,10 @@ const PointListItem = ({ pointData, updatePoint }: PointListItemProps) => {
 
     const [alert, setAlert] = React.useState<[string, boolean]>(["Nothing", false])
 
+    React.useEffect(() => {
+        updatePoint(pointBuffer)
+    }, [pointBuffer])
+
     return (
         <div className='bg-bgdark p-[10px] my-[10px] rounded-md'>
             {

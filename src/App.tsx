@@ -25,7 +25,18 @@ export const tools: ToolObject = {
         tools: {
             plotting: {
                 name: "Plotting",
-                link: "/visual/plotting"
+                link: "/visual/plotting",
+                show: false
+            }
+        },
+        show: false
+    },
+    misc: {
+        name: "Miscellaneous",
+        tools: {
+            plotting: {
+                name: "String Length",
+                link: "/misc/string-length"
             }
         }
     }
