@@ -9,7 +9,7 @@ const Template = () => {
             <SideBar />
             <div className="flex flex-col w-[85vw]">
                 <Path />
-                <div className="p-[5px]">
+                <div className="p-[10px] h-full">
                     <Outlet />
                 </div>
             </div>

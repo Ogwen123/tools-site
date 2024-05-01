@@ -34,7 +34,7 @@ export const tools: ToolObject = {
     misc: {
         name: "Miscellaneous",
         tools: {
-            plotting: {
+            string_length: {
                 name: "String Length",
                 link: "/misc/string-length"
             }

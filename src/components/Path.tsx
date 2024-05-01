@@ -24,7 +24,7 @@ const Path = () => {
             if (!next[i]) {
                 if (index !== path.length - 1) {
                     pathComponenents.push("ERROR")
-                    console.log("here")
+                    console.log("here 1")
                     break
                 } else {
                     let found = false
@@ -37,7 +37,7 @@ const Path = () => {
                     }
                     if (!found) {
                         pathComponenents.push("ERROR")
-                        console.log("here")
+                        console.log("here 2")
                     }
                 }
             } else {

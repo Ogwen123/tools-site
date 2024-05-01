@@ -11,6 +11,7 @@ export default {
         "bgdark": "#1c2128",
         "main": "#009788",
         "maindark": "#00645a",
+        "mainlight": "#08d4bf",
         "secondary": "#03a9f4",
         "secondarydark": "#0276aa",
         "success": "#27ea60",
