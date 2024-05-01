@@ -11,13 +11,20 @@ const Home = () => {
             {
                 Object.keys(tools).map((categoryKey, index) => {
                     const category = tools[categoryKey]
+                    if (category.show !== undefined && category.show === false) {
+                        return (<div key={index}></div>)
+                    }
                     return (
                         <div key={index} className='rounded-md p-[10px] m-[10px] bg-bgdark min-w-[calc(25%-20px)] h-[300px]'>
                             {category.name}
                             <div className='flex flex-row'>
                                 <div>
                                     {
-                                        Object.keys(category.tools).map((_, index) => {
+                                        Object.keys(category.tools).map((toolKey, index) => {
+                                            const tool = category.tools[toolKey]
+                                            if (tool.show !== undefined && tool.show === false) {
+                                                return (<div key={index}></div>)
+                                            }
                                             return (
                                                 <div key={index} className='h-[40px]'>
                                                     <svg
@@ -36,11 +43,14 @@ const Home = () => {
                                     {
                                         Object.keys(category.tools).map((toolKey, index) => {
                                             const tool = category.tools[toolKey]
+                                            if (tool.show !== undefined && tool.show === false) {
+                                                return (<div key={index}></div>)
+                                            }
                                             return (
                                                 <div className='h-[40px] flex items-center' key={index}>
                                                     <NavLink
                                                         to={tool.link}
-                                                        className="underline hover:text-main underline-offset-2"
+                                                        className="hover:underline hover:text-main underline-offset-2"
                                                     >{tool.name}</NavLink>
                                                 </div>
                                             )

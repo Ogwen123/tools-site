@@ -51,7 +51,7 @@ const SideBar = () => {
                                             <NavLink
                                                 key={index}
                                                 to={tool.link}
-                                                className="underline hover:text-main underline-offset-2"
+                                                className="hover:underline hover:text-main underline-offset-2"
                                             >{tool.name}</NavLink>
                                         </div>
                                     )
