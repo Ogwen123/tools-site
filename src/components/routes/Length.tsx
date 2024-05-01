@@ -5,20 +5,26 @@ import { countLetters, countLettersWithoutSpaces, wordCount } from "../../utils/
 
 const Length = () => {
 
-    const [countSpecific, setCountSpecific] = React.useState<boolean>(true)
+    const [countSpecific, setCountSpecific] = React.useState<string>("")
     const [string, setString] = React.useState<string>("")
-
-    React.useEffect(() => {
-        setCountSpecific(false)
-    }, [])
 
     return (
         <div className="w-full flex flex-row h-full">
             <div className="w-[calc(25%-5px)] flex flex-col mr-[5px]">
                 <div className="bg-bgdark rounded-md p-[5px] shrink">
                     <div>
-                        <div className="text-lg">Count Specific Letter</div>
+                        <div className="text-lg">Count Specific String</div>
+                        <input
+                            type="text"
+                            className="form-input bg-bg"
+                            placeholder="Letter"
+                            value={countSpecific}
+                            onChange={(e) => {
+                                setCountSpecific(e.target.value)
+                            }}
+                        ></input>
                     </div>
+                    <hr className="border-hr my-[5px]" />
                     <div>
                         <div className="text-lg">Regex Matching</div>
                     </div>
@@ -48,10 +54,10 @@ const Length = () => {
                         <div className="text-2xl text-mainlight">{countLettersWithoutSpaces(string)}</div>
                         <div className="mb-[2px]">&nbsp;Letters Without Spaces</div>
                     </div>
-                    {countSpecific &&
+                    {countSpecific !== "" &&
                         <div className="flex flex-row items-end mr-[40px]">
-                            <div className="text-2xl text-mainlight">100</div>
-                            <div className="mb-[2px]">&nbsp;Occurences of x</div>
+                            <div className="text-2xl text-mainlight">{(string.match(new RegExp(countSpecific, "g")) || []).length}</div>
+                            <div className="mb-[2px] flex flex-row">&nbsp;Occurences of&nbsp;<div className="text-secondary">{countSpecific}</div></div>
                         </div>
                     }
                 </div>
