@@ -40,6 +40,19 @@ export const tools: ToolObject = {
                 link: "/misc/string-length"
             }
         }
+    },
+    external: {
+        name: "External Tools",
+        tools: {
+            markdown_table: {
+                name: "Markdown Table Generator",
+                link: "https://table.ogwen.eu.org"
+            },
+            sqlite_generator: {
+                name: "SQLite Generator",
+                link: "https://sql.ogwen.eu.org"
+            }
+        }
     }
 }
 

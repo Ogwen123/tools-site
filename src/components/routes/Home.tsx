@@ -64,7 +64,7 @@ const Home = () => {
                                         return (
                                             <div key={_index} className='flex flex-row'>
                                                 {show ?
-                                                    <NavLink to={tool.link} className="hover:underline">{tool.name}</NavLink>
+                                                    <NavLink to={tool.link} target={tool.link.startsWith("http") ? "_blank" : ""} className="hover:underline">{tool.name}</NavLink>
                                                     :
                                                     <div>{tool.name}</div>
                                                 }
