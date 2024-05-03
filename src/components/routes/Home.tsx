@@ -83,6 +83,7 @@ const Home = () => {
                     })
                 }
             </div>
+            <div className='text-bg'>Turn off your dark mode extension to see the pretty gradients.</div>
         </div>
     )
 }
