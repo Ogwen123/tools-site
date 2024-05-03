@@ -2,6 +2,7 @@
 import { Outlet, useOutletContext } from 'react-router-dom'
 import { ToolObject } from './global/types'
 
+
 export const tools: ToolObject = {
     conversions: {
         name: "Conversions",
@@ -29,7 +30,7 @@ export const tools: ToolObject = {
                 show: false
             }
         },
-        show: false
+        show: true
     },
     misc: {
         name: "Miscellaneous",

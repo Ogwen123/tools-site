@@ -11,7 +11,7 @@ const Length = () => {
     return (
         <div className="w-full flex flex-row h-full">
             <div className="w-[calc(25%-5px)] flex flex-col mr-[5px]">
-                <div className="bg-bgdark rounded-md p-[5px] shrink">
+                <div className="bg-bgdark rounded-md p-[10px] shrink">
                     <div>
                         <div className="text-lg">Count Specific String</div>
                         <input
@@ -27,6 +27,7 @@ const Length = () => {
                     <hr className="border-hr my-[5px]" />
                     <div>
                         <div className="text-lg">Regex Matching</div>
+                        WIP
                     </div>
                 </div>
             </div>
@@ -41,7 +42,7 @@ const Length = () => {
                 >
 
                 </textarea>
-                <div className="w-full my-[5px] bg-bgdark rounded-lg p-[5px] flex flex-row">
+                <div className="w-full my-[5px] bg-bgdark rounded-lg p-[10px] flex flex-row">
                     <div className="flex flex-row items-end mr-[40px]">
                         <div className="text-2xl text-mainlight">{wordCount(string)}</div>
                         <div className="mb-[2px]">&nbsp;Words</div>

@@ -33,4 +33,26 @@ body {
     .action-button {
         @apply bg-bg rounded-lg h-full w-[60px] fc mr-[10px]
     }
+
+    .gradient-0 {
+        @apply bg-gradient-to-br from-[#2E3192] to-[#1BFFFF]
+    }
+
+    .gradient-1 {
+        @apply bg-gradient-to-br from-[#D4145A] to-[#FBB03B]
+    }
+
+    .gradient-2 {
+        @apply bg-gradient-to-br from-[#009245] to-[#FCEE21]
+    }
+
+    .gradient-3 {
+        @apply bg-gradient-to-br from-[#662D8C] to-[#ED1E79]
+    }
+
+    .gradient-4 {
+        @apply bg-gradient-to-br from-[#D8B5FF] to-[#1EAE98]
+    }
+
+
 }
