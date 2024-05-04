@@ -24,6 +24,7 @@ import Plotting from "./components/routes/Plotting";
 
 import MiscHome from "./components/misc/Home"
 import Length from "./components/routes/Length";
+import RegexMatcher from "./components/routes/RegexMatcher";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -39,9 +40,10 @@ const router = createBrowserRouter(
                 <Route index element={<VisualHome />} />
                 <Route path="/visual/plotting" element={<Plotting />} />
             </Route>
-            <Route path="/misc" element={<Template />}>
+            <Route path="/string" element={<Template />}>
                 <Route index element={<MiscHome />} />
-                <Route path="/misc/string-length" element={<Length />} />
+                <Route path="/string/string-length" element={<Length />} />
+                <Route path="/string/regex-matcher" element={<RegexMatcher />} />
             </Route>
             <Route path="*" element={<NotFound />} />
         </Route>

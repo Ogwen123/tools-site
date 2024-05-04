@@ -12,9 +12,18 @@ const SideBar = () => {
 
     React.useEffect(() => {
         const loc = parsedPathname().split("/")[0]
-
-        if (tools[loc] !== null) {
+        if (tools[loc] !== undefined) {
             setPage(tools[loc])
+        } else {
+            setPage({
+                name: "ERROR",
+                tools: {
+                    ERROR: {
+                        name: "ERROR",
+                        link: "/"
+                    }
+                }
+            })
         }
     }, [])
 

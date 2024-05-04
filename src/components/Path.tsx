@@ -13,18 +13,20 @@ const Path = () => {
 
     React.useEffect(() => {
         const pathComponenents: ({ name: string, link: string } | "ERROR")[] = []
-        const path = parsedPathname().split("/")
-
+        const pathname = parsedPathname().split("/")
         let next: any = tools
 
         let pathToSet = ""
 
-        for (let [index, i] of path.entries()) {
+        for (let [index, i] of pathname.entries()) {
             pathToSet += "/" + i
-            if (!next[i]) {
-                if (index !== path.length - 1) {
+            if (next[i] === undefined) {
+                if (next.tools === undefined) {
                     pathComponenents.push("ERROR")
-                    console.log("here 1")
+                    break
+                }
+                if (index !== pathname.length - 1) {
+                    pathComponenents.push("ERROR")
                     break
                 } else {
                     let found = false
@@ -37,15 +39,12 @@ const Path = () => {
                     }
                     if (!found) {
                         pathComponenents.push("ERROR")
-                        console.log("here 2")
                     }
                 }
             } else {
                 pathComponenents.push({ name: next[i].name, link: pathToSet })
                 next = next[i]
             }
-
-
         }
 
         setPath([{ name: "Tools", link: "/" }, ...pathComponenents])

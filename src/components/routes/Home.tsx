@@ -1,10 +1,8 @@
 import React from 'react'
-import { useTools } from '../../App'
+import { GRADIENT_COUNT, useTools } from '../../App'
 import { NavLink } from 'react-router-dom'
 
 const Home = () => {
-
-    const GRADIENT_COUNT = 5
 
     const { tools } = useTools()
 
@@ -61,6 +59,13 @@ const Home = () => {
                                 <div className='flex flex-row items-center flex-grow'>
                                     {Object.keys(category.tools).map((toolKey, _index) => {
                                         const tool = category.tools[toolKey]
+
+                                        if (tool.show !== undefined && tool.show === false) {
+                                            return (
+                                                <div key={index}></div>
+                                            )
+                                        }
+
                                         return (
                                             <div key={_index} className='flex flex-row'>
                                                 {show ?
@@ -83,7 +88,7 @@ const Home = () => {
                     })
                 }
             </div>
-            <div className='text-bg'>Turn off your dark mode extension to see the pretty gradients.</div>
+            <div className='text-bg'>Turn off your dark mode extension to see the pretty gradients, the website is already dark mode.</div>
         </div>
     )
 }

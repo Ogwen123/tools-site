@@ -25,15 +25,11 @@ const Length = () => {
                         ></input>
                     </div>
                     <hr className="border-hr my-[5px]" />
-                    <div>
-                        <div className="text-lg">Regex Matching</div>
-                        WIP
-                    </div>
                 </div>
             </div>
             <div className="w-[calc(75%-5px)] ml-[5px] ">
                 <textarea
-                    className="w-full mb-[5px] rounded-md bg-bgdark text-white px-[10px] py-[5px] h-[200px] resize-none"
+                    className="w-full mb-[5px] rounded-md bg-bgdark text-white px-[10px] py-[5px] h-[350px] resize-none"
                     placeholder="Enter your text here..."
                     value={string}
                     onChange={(e) => {

@@ -32,12 +32,16 @@ export const tools: ToolObject = {
         },
         show: true
     },
-    misc: {
-        name: "Miscellaneous",
+    string: {
+        name: "String",
         tools: {
             string_length: {
                 name: "String Length",
-                link: "/misc/string-length"
+                link: "/string/string-length"
+            },
+            regex_matcher: {
+                name: "RegEx Matcher",
+                link: "/string/regex-matcher"
             }
         }
     },
@@ -55,6 +59,8 @@ export const tools: ToolObject = {
         }
     }
 }
+
+export const GRADIENT_COUNT = 5
 
 const App = () => {
     return (
