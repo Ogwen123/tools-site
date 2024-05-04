@@ -88,7 +88,7 @@ const Home = () => {
                     })
                 }
             </div>
-            <div className='text-bg'>Turn off your dark mode extension to see the pretty gradients, the website is already dark mode.</div>
+            <div className='text-bg select-none'>Turn off your dark mode extension to see the pretty gradients, the website is already dark mode.</div>
         </div>
     )
 }
