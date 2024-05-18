@@ -1,6 +1,6 @@
 import React from 'react'
-import { PointData } from '../../global/types'
-import PointListItem from '../visual/plotting/PointListItem'
+import { PointData } from '../../../global/types'
+import PointListItem from '../../visual/plotting/PointListItem'
 
 const Plotting = () => {
 

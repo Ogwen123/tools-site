@@ -1,47 +1,39 @@
-//import React from 'react'
+import React from 'react'
+import { binaryToDenary, denaryToBinary } from '../../../utils/conversions'
+import { _Alert } from '../../../global/types'
+import Alert, { alertReset } from '../../Alert'
 
-import React from "react"
-import { _Alert } from "../../global/types"
-import { binaryToDenary, denaryToHex, hexToBinary } from "../../utils/conversions"
-import Alert, { alertReset } from "../Alert"
+const BinaryToDenary = () => {
 
-const HexToDenary = () => {
-    const [hex, setHex] = React.useState<string>("")
+    const [binary, setBinary] = React.useState<string>("")
     const [denary, setDenary] = React.useState<string>("")
-    const [lastChanged, setLastChanged] = React.useState<"HEX" | "DEN">()
+    const [tc, setTc] = React.useState<boolean>(false)
+    const [lastChanged, setLastChanged] = React.useState<"BIN" | "DEN">("BIN")
     const [alert, setAlert] = React.useState<_Alert>(["Alert", "ERROR", false])
 
 
     const convert = () => {
         console.log("123")
-        if (lastChanged === "HEX") {
-            const binaryValue = hexToBinary(hex)
-
-            if (binaryValue === false) {
-                setAlert(["Invalid Hex.", "ERROR", true])
-                setTimeout(() => { setAlert(alertReset) }, 5000)
-                return
-            }
-
-            const denaryValue = binaryToDenary(binaryValue, false)
+        if (lastChanged === "BIN") {
+            const denaryValue = binaryToDenary(binary, tc)
 
             if (denaryValue === false) {
-                setAlert(["An error occured during conversion, this could be due to invalid hex.", "ERROR", true])
+                setAlert(["Invalid binary format.", "ERROR", true])
                 setTimeout(() => { setAlert(alertReset) }, 5000)
                 return
             }
 
             setDenary(denaryValue.toString())
         } else {
-            const hexValue = denaryToHex(denary)
+            const binaryValue = denaryToBinary(denary, tc)
 
-            if (hexValue === false) {
-                setAlert(["Invalid Denary.", "ERROR", true])
+            if (binaryValue === false) {
+                setAlert(["Invalid denary.", "ERROR", true])
                 setTimeout(() => { setAlert(alertReset) }, 5000)
                 return
             }
 
-            setHex(hexValue)
+            setBinary(binaryValue)
         }
     }
 
@@ -58,10 +50,10 @@ const HexToDenary = () => {
                 <div className='my-[10px]'>
                     <div>Binary</div>
                     <input
-                        value={hex}
+                        value={binary}
                         onChange={(e) => {
-                            setHex(e.target.value.toUpperCase().replace(/X/g, "x"))
-                            setLastChanged("HEX")
+                            setBinary(e.target.value)
+                            setLastChanged("BIN")
                         }}
                         placeholder='Binary'
                         className='form-input bg-bg'
@@ -79,10 +71,23 @@ const HexToDenary = () => {
                         className='form-input bg-bg'
                     ></input>
                 </div>
+                <div className='my-[10px]'>
+                    <div className='flex items-center flex-row'>
+                        <div className='mr-[10px]'>Two's Compliment</div>
+                        <input
+                            type="checkbox"
+                            className='accent-main h-4 w-4'
+                            checked={tc}
+                            onChange={(e) => {
+                                setTc(e.target.checked)
+                            }}
+                        />
+                    </div>
+                </div>
                 <button className='button my-[10px]' onClick={() => convert()}>Convert</button>
             </div>
         </div>
     )
 }
 
-export default HexToDenary
+export default BinaryToDenary

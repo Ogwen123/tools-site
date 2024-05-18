@@ -1,7 +1,7 @@
 //import React from 'react'
 
 import React from "react"
-import { countLetters, countLettersWithoutSpaces, wordCount } from "../../utils/length"
+import { countLetters, countLettersWithoutSpaces, wordCount } from "../../../utils/length"
 
 const Length = () => {
 

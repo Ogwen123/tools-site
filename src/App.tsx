@@ -28,6 +28,10 @@ export const tools: ToolObject = {
                 name: "Plotting",
                 link: "/visual/plotting",
                 show: false
+            },
+            markdown_visualiser: {
+                name: "Markdown Visualiser",
+                link: "/visual/markdown-visualiser"
             }
         },
         show: true

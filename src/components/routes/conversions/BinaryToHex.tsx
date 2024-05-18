@@ -1,13 +1,13 @@
 import React from 'react'
-import { binaryToDenary, denaryToHex, hexToBinary } from '../../utils/conversions'
-import Alert, { alertReset } from '../Alert'
-import { _Alert } from '../../global/types'
+import { binaryToDenary, denaryToHex, hexToBinary } from '../../../utils/conversions'
+import Alert, { alertReset } from '../../Alert'
+import { _Alert } from '../../../global/types'
 
 const BinaryToHex = () => {
 
     const [binary, setBinary] = React.useState<string>("")
     const [hex, setHex] = React.useState<string>("")
-    const [lastChanged, setLastChanged] = React.useState<"BIN" | "HEX">()
+    const [lastChanged, setLastChanged] = React.useState<"BIN" | "HEX">("BIN")
     const [alert, setAlert] = React.useState<_Alert>(["Alert", "ERROR", false])
 
     const convert = () => {

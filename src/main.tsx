@@ -15,16 +15,17 @@ import NotFound from "./components/NotFound";
 import Home from "./components/routes/Home";
 
 import ConversionsHome from "./components/conversions/Home";
-import BinaryToHex from "./components/routes/BinaryToHex";
-import BinaryToDenary from "./components/routes/BinaryToDenary";
-import HexToDenary from "./components/routes/HexToDenary";
+import BinaryToHex from "./components/routes/conversions/BinaryToHex";
+import BinaryToDenary from "./components/routes/conversions/BinaryToDenary";
+import HexToDenary from "./components/routes/conversions/HexToDenary";
 
 import VisualHome from "./components/visual/Home";
-import Plotting from "./components/routes/Plotting";
+import Plotting from "./components/routes/visual/Plotting";
 
 import MiscHome from "./components/misc/Home"
-import Length from "./components/routes/Length";
-import RegexMatcher from "./components/routes/RegexMatcher";
+import Length from "./components/routes/string/Length";
+import RegexMatcher from "./components/routes/string/RegexMatcher";
+import MarkdownVisualiser from "./components/routes/visual/MarkdownVisualiser";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -39,6 +40,7 @@ const router = createBrowserRouter(
             <Route path="/visual" element={<Template />}>
                 <Route index element={<VisualHome />} />
                 <Route path="/visual/plotting" element={<Plotting />} />
+                <Route path="/visual/markdown-visualiser" element={<MarkdownVisualiser />} />
             </Route>
             <Route path="/string" element={<Template />}>
                 <Route index element={<MiscHome />} />
