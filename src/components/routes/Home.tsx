@@ -74,7 +74,7 @@ const Home = () => {
                                                     <div>{tool.name}</div>
                                                 }
                                                 {
-                                                    _index !== Object.keys(category.tools).length - 1 &&
+                                                    _index !== Object.keys(category.tools).length - 1 && (category.tools[Object.keys(category.tools)[_index + 1]].show !== false || _index + 1 !== Object.keys(category.tools).length - 1) &&
                                                     <div className='mx-[10px]'>
                                                         •
                                                     </div>

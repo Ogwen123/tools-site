@@ -13,7 +13,8 @@ export const tools: ToolObject = {
             },
             binary_to_denary: {
                 name: "Binary To Denary",
-                link: "/conversions/binary-to-denary"
+                link: "/conversions/binary-to-denary",
+                show: false
             },
             hex_to_denary: {
                 name: "Hex To Denary",
@@ -45,7 +46,8 @@ export const tools: ToolObject = {
             },
             regex_matcher: {
                 name: "RegEx Matcher",
-                link: "/string/regex-matcher"
+                link: "/string/regex-matcher",
+                show: false
             }
         }
     },

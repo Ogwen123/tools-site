@@ -17,7 +17,7 @@ const Length = () => {
                         <input
                             type="text"
                             className="form-input bg-bg"
-                            placeholder="Letter"
+                            placeholder="String"
                             value={countSpecific}
                             onChange={(e) => {
                                 setCountSpecific(e.target.value)
