@@ -27,7 +27,7 @@ const Home = () => {
                     Object.keys(tools).map((categoryKey, index) => {
                         const category = tools[categoryKey]
                         if (category.show !== undefined && category.show === false) {
-                            return (<div key={index}></div>)
+                            return (<div key={"hidden-cat-" + index}></div>)
                         }
 
                         const formattedSearch = search.toLowerCase().replace(/ /g, "_")
@@ -51,10 +51,8 @@ const Home = () => {
                             show = true
                         }
 
-                        console.log(categoryKey + " " + show)
-
                         return (
-                            <div key={index} className={'flex flex-col flex-grow rounded-md p-[10px] min-w-[300px] m-[10px] h-[100px]' + (show ? " " : " opacity-15 ") + (index % GRADIENT_COUNT === 0 ? "gradient-0" : index % GRADIENT_COUNT === 1 ? "gradient-1" : index % GRADIENT_COUNT === 2 ? "gradient-2" : index % GRADIENT_COUNT === 3 ? "gradient-3" : "gradient-4")}>
+                            <div key={"category-" + index} className={'flex flex-col flex-grow rounded-md p-[10px] min-w-[300px] m-[10px] h-[100px]' + (show ? " " : " opacity-15 ") + (index % GRADIENT_COUNT === 0 ? "gradient-0" : index % GRADIENT_COUNT === 1 ? "gradient-1" : index % GRADIENT_COUNT === 2 ? "gradient-2" : index % GRADIENT_COUNT === 3 ? "gradient-3" : "gradient-4")}>
                                 <div className='text-xl'>{category.name}</div>
                                 <div className='flex flex-row items-center flex-grow'>
                                     {Object.keys(category.tools).map((toolKey, _index) => {
@@ -62,12 +60,12 @@ const Home = () => {
 
                                         if (tool.show !== undefined && tool.show === false) {
                                             return (
-                                                <div key={index}></div>
+                                                <div key={"hidden-tool-" + index}></div>
                                             )
                                         }
 
                                         return (
-                                            <div key={_index} className='flex flex-row'>
+                                            <div key={"tool-" + _index} className='flex flex-row'>
                                                 {show ?
                                                     <NavLink to={tool.link} target={tool.link.startsWith("http") ? "_blank" : ""} className="hover:underline">{tool.name}</NavLink>
                                                     :

@@ -25,3 +25,7 @@ export type PointData = {
     colour: string,
     show: boolean
 }
+
+export type TruthTableOutput = {
+
+}

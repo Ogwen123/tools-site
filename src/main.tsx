@@ -22,10 +22,13 @@ import HexToDenary from "./components/routes/conversions/HexToDenary";
 import VisualHome from "./components/visual/Home";
 import Plotting from "./components/routes/visual/Plotting";
 
-import MiscHome from "./components/misc/Home"
+import StringHome from "./components/string/Home"
 import Length from "./components/routes/string/Length";
 import RegexMatcher from "./components/routes/string/RegexMatcher";
 import MarkdownVisualiser from "./components/routes/visual/MarkdownVisualiser";
+
+import LogicHome from "./components/logic/Home"
+import TruthTableGenerator from "./components/routes/logic/TruthTableGenerator";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -43,9 +46,13 @@ const router = createBrowserRouter(
                 <Route path="/visual/markdown-visualiser" element={<MarkdownVisualiser />} />
             </Route>
             <Route path="/string" element={<Template />}>
-                <Route index element={<MiscHome />} />
+                <Route index element={<StringHome />} />
                 <Route path="/string/string-length" element={<Length />} />
                 <Route path="/string/regex-matcher" element={<RegexMatcher />} />
+            </Route>
+            <Route path="/logic" element={<Template />}>
+                <Route index element={<LogicHome />} />
+                <Route path="/logic/truth-table-generator" element={<TruthTableGenerator />} />
             </Route>
             <Route path="*" element={<NotFound />} />
         </Route>

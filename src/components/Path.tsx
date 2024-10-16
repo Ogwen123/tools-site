@@ -20,6 +20,7 @@ const Path = () => {
 
         for (let [index, i] of pathname.entries()) {
             pathToSet += "/" + i
+            console.log(pathToSet)
             if (next[i] === undefined) {
                 if (next.tools === undefined) {
                     pathComponenents.push("ERROR")

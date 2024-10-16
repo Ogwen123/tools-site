@@ -54,5 +54,7 @@ body {
         @apply bg-[#D8B5FF] bg-gradient-to-br from-[#D8B5FF] to-[#1EAE98]
     }
 
-
+    .border-w {
+        @apply border border-solid border-white/5
+    }
 }

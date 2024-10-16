@@ -51,6 +51,15 @@ export const tools: ToolObject = {
             }
         }
     },
+    logic: {
+        name: "Logic",
+        tools: {
+            truth_table_generator: {
+                name: "Truth Table Generator",
+                link: "/logic/truth-table-generator"
+            }
+        }
+    },
     external: {
         name: "External Tools",
         tools: {

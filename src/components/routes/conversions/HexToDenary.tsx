@@ -13,7 +13,6 @@ const HexToDenary = () => {
 
 
     const convert = () => {
-        console.log("123")
         if (lastChanged === "HEX") {
             const binaryValue = hexToBinary(hex)
 
