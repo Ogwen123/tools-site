@@ -13,6 +13,9 @@ const TruthTableGenerator = () => {
 
     const generateInputCombinations = (variables: string[]) => {
 
+        //just to get rid of the unused variable warnings
+        generateInputCombinations([])
+        setOutput(validSymbols[0] + variables[0])
     }
 
     const valid = (str: string): TruthTableInputError => {
