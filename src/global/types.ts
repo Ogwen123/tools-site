@@ -26,6 +26,11 @@ export type PointData = {
     show: boolean
 }
 
+export type TruthTableInputError = {
+    valid: boolean,
+    error: string | undefined
+}
+
 export type TruthTableOutput = {
 
 }

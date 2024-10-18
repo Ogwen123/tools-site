@@ -29,6 +29,7 @@ import MarkdownVisualiser from "./components/routes/visual/MarkdownVisualiser";
 
 import LogicHome from "./components/logic/Home"
 import TruthTableGenerator from "./components/routes/logic/TruthTableGenerator";
+import Lister from "./components/routes/string/Lister";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -49,6 +50,7 @@ const router = createBrowserRouter(
                 <Route index element={<StringHome />} />
                 <Route path="/string/string-length" element={<Length />} />
                 <Route path="/string/regex-matcher" element={<RegexMatcher />} />
+                <Route path="/string/lister" element={<Lister />} />
             </Route>
             <Route path="/logic" element={<Template />}>
                 <Route index element={<LogicHome />} />

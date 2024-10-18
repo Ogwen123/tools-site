@@ -1,28 +1,51 @@
 import React from 'react'
-import { TruthTableOutput } from '../../../global/types'
+import { TruthTableInputError, TruthTableOutput } from '../../../global/types'
+
+const validSymbols = ["∧", "∨", "¬", "→", "(", ")", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+]
 
 const TruthTableGenerator = () => {
 
     const [input, setInput] = React.useState<string>("")
     const [output, setOutput] = React.useState<TruthTableOutput>()
 
-    const [validInput, setValidInpput] = React.useState<{ valid: boolean, error: string | undefined }>({ valid: true, error: undefined })
+    const [validInput, setValidInput] = React.useState<TruthTableInputError>({ valid: true, error: undefined })
 
     const generateInputCombinations = (variables: string[]) => {
 
     }
 
-    const valid = (str: string) => {
+    const valid = (str: string): TruthTableInputError => {
+        // check brackets
 
+        let bracket_diff = 0
+
+        for (let i of str) {
+            if (i === "(") bracket_diff++
+            else if (i === ")") bracket_diff--
+        }
+
+        if (bracket_diff > 0) {
+            return { valid: false, error: "ERROR: Mismatched Brackets. Too many opening brackets." }
+        } else if (bracket_diff < 0) {
+            return { valid: false, error: "ERROR: Mismatched Brackets. Too many closing brackets." }
+        }
+
+        // check symbols
+
+        return { valid: true, error: undefined }
     }
 
-    const handleInput = () => {
+    React.useEffect(() => {
         // check the input is valid
+        const res = valid(input)
+
+        setValidInput(res)
         // split formula up by brackets
         // solve each bracket
         // bring all the results together
         // solve the final formula
-    }
+    }, [input])
 
     return (
         <div className='flex fc flex-col'>
@@ -35,7 +58,7 @@ const TruthTableGenerator = () => {
             <div>
                 {
                     !validInput.valid &&
-                    <div className='text-error'>
+                    <div className='text-error mt-[10px]'>
                         {validInput.error !== undefined ? validInput.error : "Please enter a valid formula."}
                     </div>
                 }
