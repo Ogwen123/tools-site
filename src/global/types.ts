@@ -34,3 +34,4 @@ export type TruthTableInputError = {
 export type TruthTableOutput = {
 
 }
+

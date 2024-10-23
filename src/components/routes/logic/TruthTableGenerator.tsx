@@ -18,6 +18,10 @@ const TruthTableGenerator = () => {
         setOutput(validSymbols[0] + variables[0])
     }
 
+    const isLiteralOrProposition = (str: string) => {
+
+    }
+
     const valid = (str: string): TruthTableInputError => {
         // check brackets
 
@@ -35,6 +39,10 @@ const TruthTableGenerator = () => {
         }
 
         // check symbols
+
+        for (let i of str) {
+            if (!validSymbols.includes(i)) return { valid: false, error: "ERROR: Invalid symbol." }
+        }
 
         return { valid: true, error: undefined }
     }

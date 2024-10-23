@@ -32,6 +32,10 @@ export const tools: ToolObject = {
             markdown_visualiser: {
                 name: "Markdown Visualiser",
                 link: "/visual/markdown-visualiser"
+            },
+            maps_visualiser: {
+                name: "Maps Visualiser",
+                link: "/visual/maps-visualiser"
             }
         },
         show: true
