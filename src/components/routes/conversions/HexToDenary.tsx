@@ -46,7 +46,7 @@ const HexToDenary = () => {
 
     return (
         <div className='flex fc flex-col'>
-            <div className='text-4xl mt-[100px]'>Binary to Denary</div>
+            <div className='text-4xl mt-[100px]'>Hex to Denary</div>
             <div className='w-2/5 mt-[30px] bg-bgdark rounded-md p-[10px]'>
                 <Alert
                     content={alert[0] instanceof Array ? alert[0][1] : alert[0]}
@@ -55,11 +55,11 @@ const HexToDenary = () => {
                     title={alert[0] instanceof Array ? alert[0][0] : undefined}
                 />
                 <div className='my-[10px]'>
-                    <div>Binary</div>
+                    <div>Hexadecimal</div>
                     <input
                         value={hex}
                         onChange={(e) => {
-                            setHex(e.target.value.toUpperCase().replace(/X/g, "x"))
+                            setHex(e.target.value.toUpperCase())
                             setLastChanged("HEX")
                         }}
                         placeholder='Binary'

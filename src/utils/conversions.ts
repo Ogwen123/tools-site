@@ -135,7 +135,7 @@ export const denaryToHex = (denaryStr: string): string | false => {
         hex += convert(i % 16)
     }
 
-    return "0x" + hex
+    return hex
 }
 
 export const hexToBinary = (hex: string): string | false => {

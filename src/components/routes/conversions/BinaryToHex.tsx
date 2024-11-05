@@ -26,12 +26,7 @@ const BinaryToHex = () => {
             }
             setHex(hexValue.toString())
         } else {
-            let tempHex = hex
-            if (hex.startsWith("0x")) {
-                tempHex = hex.slice(2)
-            }
-
-            const binaryValue = hexToBinary(tempHex)
+            const binaryValue = hexToBinary(hex)
 
             if (binaryValue === false) {
                 setAlert(["Invalid binary format.", "ERROR", true])
