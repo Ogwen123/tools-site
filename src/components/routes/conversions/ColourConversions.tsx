@@ -45,7 +45,7 @@ const ColourConversions = () => {
 
     return (
         <div className="flex fc flex-col">
-            <div className='text-4xl mt-[100px]'>Binary to Hexidecimal</div>
+            <div className='text-4xl mt-[100px]'>Colour Conversions</div>
             <div className='w-2/5 mt-[30px] bg-bgdark rounded-md p-[10px]'>
                 <input
                     className="form-input bg-bg"
