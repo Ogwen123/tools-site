@@ -22,6 +22,7 @@ export default {
         "hr": "#444c56",
         "hrdark": "#292e36",
         "textlight": "#9ca3af",
+        "subtext": "#bebebe",
         "admin": "#2563eb"
       },
     },

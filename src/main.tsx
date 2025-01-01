@@ -31,6 +31,7 @@ import LogicHome from "./components/logic/Home"
 import TruthTableGenerator from "./components/routes/logic/TruthTableGenerator";
 import Lister from "./components/routes/string/Lister";
 import MapsVisualiser from "./components/routes/visual/MapsVisualiser";
+import ColourConversions from "./components/routes/conversions/ColourConversions.tsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -41,6 +42,7 @@ const router = createBrowserRouter(
                 <Route path="/conversions/binary-to-hex" element={<BinaryToHex />} />
                 <Route path="/conversions/binary-to-denary" element={<BinaryToDenary />} />
                 <Route path="/conversions/hex-to-denary" element={<HexToDenary />} />
+                <Route path="/conversions/colour-conversions" element={<ColourConversions />} />
             </Route>
             <Route path="/visual" element={<Template />}>
                 <Route index element={<VisualHome />} />

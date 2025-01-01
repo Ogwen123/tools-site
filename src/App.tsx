@@ -18,6 +18,10 @@ export const tools: ToolObject = {
             hex_to_denary: {
                 name: "Hex To Denary",
                 link: "/conversions/hex-to-denary"
+            },
+            colour_conversions: {
+                name: "Colour Conversions",
+                link: "/conversions/colour-conversions"
             }
         }
     },

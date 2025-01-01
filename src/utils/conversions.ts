@@ -1,3 +1,5 @@
+import {ColourConversionResult, ColourInput, RGB} from "../global/types.ts";
+
 export const validateInput = (input: string, type: "HEX" | "BIN" | "DEN"): boolean => {
 
     const validChars = {
@@ -113,7 +115,7 @@ export const binaryToDenary = (binary: string, twosComp: boolean): number | fals
 }
 
 export const denaryToHex = (denaryStr: string): string | false => {
-    if (validateInput(denaryStr, "DEN") === false) return false
+    if (!validateInput(denaryStr, "DEN")) return false
 
     const convert = (number: number) => { // convert a denary number under 16 to hex
         if (number >= 16) return
@@ -152,4 +154,26 @@ export const hexToBinary = (hex: string): string | false => {
     }
 
     return binary
+}
+
+export const colourToRGB = (input: ColourInput): RGB => {
+    if (input.type === "RGB") {
+        let numbers = input.input.split("(")[1].split(", ")
+        numbers[2] = numbers[2].slice(0, numbers[2].length - 1)
+        console.log(numbers)
+        return {blue: 0, green: 0, red: 0, string: ""}
+    } else if (input.type === "HEX") {
+
+    }
+}
+
+export const RGBToColours = (rbg: RGB): ColourConversionResult => {
+    return {
+        active: true,
+        cmyk: "",
+        hex: "",
+        hsl: "",
+        hwb: "",
+        rgb: ""
+    }
 }
