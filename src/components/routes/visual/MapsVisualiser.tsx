@@ -86,7 +86,7 @@ const MapsVisualiser = () => {
                 Set Maps Visualiser
             </div>
             {
-                alert[2] == true ?
+                alert[2] ?
                     <div className='w-2/5 border-w rounded-md text-center p-[10px] mt-[10px] h-[44px] bg-error'>
                         {alert[0]}
                     </div>
@@ -128,9 +128,13 @@ const MapsVisualiser = () => {
                             className="form-input"
                             id="set-input-1"
                             onChange={(e) => {
-                                setSets((set) => ({
-                                    ...set, a: e.target.value.replace(/ /g, "").split(",").map(validateInput).filter((value, _) => value !== undefined && value !== null)
-                                }))
+                                // @ts-ignore
+                                setSets((set) => {
+                                    return ({
+                                        ...set,
+                                        a: e.target.value.replace(/ /g, "").split(",").map(validateInput).filter((value, _) => value !== undefined && value !== null)
+                                    });
+                                })
                             }}
                         />
                         <input
@@ -139,9 +143,13 @@ const MapsVisualiser = () => {
                             className="form-input"
                             id="set-input-2"
                             onChange={(e) => {
-                                setSets((set) => ({
-                                    ...set, b: e.target.value.replace(/ /g, "").split(",").map(validateInput).filter((value, _) => value !== undefined && value !== null)
-                                }))
+                                // @ts-ignore
+                                setSets((set) => {
+                                    return ({
+                                        ...set,
+                                        b: e.target.value.replace(/ /g, "").split(",").map(validateInput).filter((value, _) => value !== undefined && value !== null)
+                                    });
+                                })
                             }}
                         />
                         <button

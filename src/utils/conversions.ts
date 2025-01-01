@@ -163,11 +163,12 @@ export const colourToRGB = (input: ColourInput): RGB => {
         console.log(numbers)
         return {blue: 0, green: 0, red: 0, string: ""}
     } else if (input.type === "HEX") {
-
+        return {blue: 0, green: 0, red: 0, string: ""}
     }
+    return {blue: 0, green: 0, red: 0, string: ""}
 }
 
-export const RGBToColours = (rbg: RGB): ColourConversionResult => {
+export const RGBToColours = (_rbg: RGB): ColourConversionResult => {
     return {
         active: true,
         cmyk: "",

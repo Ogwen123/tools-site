@@ -20,7 +20,7 @@ const ColourConversions = () => {
         setConversionResult(RGBToColours(colourToRGB(colour)))
     }, [colour])
 
-    const detectInput = (input: String): ColourFormat => {
+    const detectInput = (input: string): ColourFormat => {
         const rgbRegex = /rgb\(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]), ?([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]), ?([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\)/
         const hexRegex = /#[\dA-Fa-f]{6}/
         const hslRegex = /hsl\(\d, ?([0-9]|[1-9][0-9]|100)%, ?([0-9]|[1-9][0-9]|100)%\)/
