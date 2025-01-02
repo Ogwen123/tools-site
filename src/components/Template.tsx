@@ -1,7 +1,7 @@
 //import React from 'react'
 import { Outlet } from 'react-router-dom'
-import SideBar from '../SideBar'
-import Path from '../Path'
+import SideBar from './SideBar.tsx'
+import Path from './Path.tsx'
 
 const Template = () => {
     return (

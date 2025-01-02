@@ -5,10 +5,10 @@ export type Tool = {
 }
 
 export type ToolCategory = {
-        name: string,
-        tools: { [id: string]: Tool },
-        show?: boolean
-    }
+    name: string,
+    tools: { [id: string]: Tool },
+    show?: boolean
+}
 
 
 export type ToolObject = {
@@ -37,7 +37,7 @@ export type TruthTableOutput = {
 export type ColourFormat = "RGB" | "HEX" | "HSL" | "HWB" | "CMYK" | "NONE"
 
 export type ColourInput = {
-    input: String,
+    input: string,
     type: ColourFormat
 }
 

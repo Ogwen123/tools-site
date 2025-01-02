@@ -1,6 +1,6 @@
 import React from 'react'
-import { PointData } from '../../../global/types'
-import { validHexColour } from '../../../utils/utils'
+import { PointData } from '../../../../global/types.ts'
+import { validHexColour } from '../../../../utils/utils.ts'
 
 interface PointListItemProps {
     pointData: PointData,

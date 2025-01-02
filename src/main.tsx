@@ -10,24 +10,24 @@ import "./index.css";
 
 
 import App from "./App";
-import Template from "./components/routes/Template";
+import Template from "./components/Template.tsx";
 import NotFound from "./components/NotFound";
 import Home from "./components/routes/Home";
 
-import ConversionsHome from "./components/conversions/Home";
+import ConversionsHome from "./components/routes/conversions/Home.tsx";
 import BinaryToHex from "./components/routes/conversions/BinaryToHex";
 import BinaryToDenary from "./components/routes/conversions/BinaryToDenary";
 import HexToDenary from "./components/routes/conversions/HexToDenary";
 
-import VisualHome from "./components/visual/Home";
+import VisualHome from "./components/routes/visual/Home.tsx";
 import Plotting from "./components/routes/visual/Plotting";
 
-import StringHome from "./components/string/Home"
+import StringHome from "./components/routes/string/Home.tsx"
 import Length from "./components/routes/string/Length";
 import RegexMatcher from "./components/routes/string/RegexMatcher";
 import MarkdownVisualiser from "./components/routes/visual/MarkdownVisualiser";
 
-import LogicHome from "./components/logic/Home"
+import LogicHome from "./components/routes/logic/Home.tsx"
 import TruthTableGenerator from "./components/routes/logic/TruthTableGenerator";
 import Lister from "./components/routes/string/Lister";
 import MapsVisualiser from "./components/routes/visual/MapsVisualiser";
