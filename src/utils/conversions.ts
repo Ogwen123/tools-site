@@ -1,4 +1,3 @@
-import HexToDenary from "../components/routes/conversions/HexToDenary.tsx";
 import { ColourConversionResult, ColourInput, RGB } from "../global/types.ts";
 
 export const validateInput = (input: string, type: "HEX" | "BIN" | "DEN"): boolean => {
@@ -255,7 +254,7 @@ export const colourToRGB = (input: ColourInput): RGB => {
     if (input.type === "RGB") {
         let numbers = input.input.split("(")[1].replace(/ /g, "").split(",")
         numbers[2] = numbers[2].replace(")", "")
-        return { blue: parseInt(numbers[0]), green: parseInt(numbers[0]), red: parseInt(numbers[0]), string: input.input }
+        return { red: parseInt(numbers[0]), green: parseInt(numbers[1]), blue: parseInt(numbers[2]), string: input.input }
     } else if (input.type === "HEX") {
         const r = binaryToDenary(hexToBinary(input.input.slice(1, 3)) as string, false)
         const g = binaryToDenary(hexToBinary(input.input.slice(3, 5)) as string, false)
@@ -287,16 +286,77 @@ export const colourToRGB = (input: ColourInput): RGB => {
     return DEFAULT
 }
 
-export const RGBToColours = (rbg: RGB): ColourConversionResult => {
-    // hex
-    const hex = "#" + denaryToHex(rbg.red.toString()) + denaryToHex(rbg.green.toString()) + denaryToHex(rbg.blue.toString())
+//@ts-ignore
+String.prototype.normalise = function () {
+    if (this.length === 1) {
+        return "0" + this
+    } else {
+        return this
+    }
+}
 
+export const RGBToColours = (rgb: RGB): ColourConversionResult => {
+    // hex
+    //@ts-ignore
+    const hex = "#" + denaryToHex(rgb.red).normalise() + denaryToHex(rgb.green).normalise() + denaryToHex(rgb.blue).normalise()
+
+    const redPrime = rgb.red / 255
+    const greenPrime = rgb.green / 255
+    const bluePrime = rgb.blue / 255
+
+    // cmyk
+    const k = 1 - (Math.max(rgb.red, rgb.green, rgb.blue) / 255)
+    const kDiff = k === 1 ? 1 : (1 - k)
+    const c = Math.round(((1 - redPrime - k) / kDiff) * 100)
+    const m = Math.round(((1 - greenPrime - k) / kDiff) * 100)
+    const y = Math.round(((1 - bluePrime - k) / kDiff) * 100)
+
+    // hsl
+
+    const rgbMin = Math.min(redPrime, greenPrime, bluePrime)
+    const rgbMax = Math.max(redPrime, greenPrime, bluePrime)
+
+    const delta = rgbMax - rgbMin
+
+    const l = Math.round(((rgbMax + rgbMin) / 2) * 100) / 100 // to 2 d.p.
+
+    let s = 0
+
+    if (rgbMin !== rgbMax) {
+        if (l <= 0.5) {
+            s = delta / (rgbMax + rgbMin)
+        } else {
+            s = delta / (2 - rgbMax - rgbMin)
+        }
+    }
+    console.log(s)
+    let h = 0
+
+    if (delta !== 0) {
+        if (redPrime == rgbMax) {
+            h = ((greenPrime - bluePrime) / delta) % 6
+        } else if (greenPrime === rgbMax) {
+            h = ((bluePrime - redPrime) / delta) + 2
+        } else if (bluePrime === rgbMax) {
+            h = ((redPrime - greenPrime) / delta) + 4
+        }
+    }
+    h = h * 60
+    if (h < 0) h += 360
+
+    h = Math.round(h)
+
+    // hwb
+
+    const w = rgbMin * 100
+
+    const b = (1 - rgbMax) * 100
     return {
         active: true,
-        cmyk: "",
-        hex: "",
-        hsl: "",
-        hwb: "",
-        rgb: ""
+        cmyk: `cmyk(${c.toString()}%, ${m.toString()}%, ${y.toString()}%, ${Math.round(k * 100).toString()}%)`,
+        hex,
+        hsl: `hsl(${h.toString()}, ${s.toString()}, ${l.toString()})`,
+        hwb: `hwb(${h.toString()}, ${w.toString()}, ${b.toString()})`,
+        rgb: rgb.string
     }
 }

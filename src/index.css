@@ -65,4 +65,8 @@ canvas {
     .border-w {
         @apply border border-solid border-white/5
     }
+
+    .colour-copy {
+        @apply size-5 hover:text-main active:text-maindark
+    }
 }

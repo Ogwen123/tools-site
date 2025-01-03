@@ -65,31 +65,31 @@ const ColourConversions = () => {
                     <div>
                         <span className="text-subtext">RGB</span> : {conversionResult.active ? conversionResult.rgb : "None"}
                     </div>
-                    <Square2StackIcon className="size-5" onClick={() => { if (conversionResult.active) navigator.clipboard.writeText(conversionResult.rgb) }} />
+                    <Square2StackIcon className="colour-copy" onClick={() => { if (conversionResult.active) navigator.clipboard.writeText(conversionResult.rgb) }} />
                 </div>
                 <div className="text-lg flex flex-row justify-between">
                     <div>
                         <span className="text-subtext">Hex</span> : {conversionResult.active ? conversionResult.hex : "None"}
                     </div>
-                    <Square2StackIcon className="size-5" onClick={() => { if (conversionResult.active) navigator.clipboard.writeText(conversionResult.hex) }} />
+                    <Square2StackIcon className="colour-copy" onClick={() => { if (conversionResult.active) navigator.clipboard.writeText(conversionResult.hex) }} />
                 </div>
                 <div className="text-lg flex flex-row justify-between">
                     <div>
                         <span className="text-subtext">HSL</span> : {conversionResult.active ? conversionResult.hsl : "None"}
                     </div>
-                    <Square2StackIcon className="size-5" onClick={() => { if (conversionResult.active) navigator.clipboard.writeText(conversionResult.hsl) }} />
+                    <Square2StackIcon className="colour-copy" onClick={() => { if (conversionResult.active) navigator.clipboard.writeText(conversionResult.hsl) }} />
                 </div>
                 <div className="text-lg flex flex-row justify-between">
                     <div>
                         <span className="text-subtext">HWB</span> : {conversionResult.active ? conversionResult.hwb : "None"}
                     </div>
-                    <Square2StackIcon className="size-5" onClick={() => { if (conversionResult.active) navigator.clipboard.writeText(conversionResult.hwb) }} />
+                    <Square2StackIcon className="colour-copy" onClick={() => { if (conversionResult.active) navigator.clipboard.writeText(conversionResult.hwb) }} />
                 </div>
                 <div className="text-lg flex flex-row justify-between">
                     <div>
                         <span className="text-subtext">CMYK</span> : {conversionResult.active ? conversionResult.cmyk : "None"}
                     </div>
-                    <Square2StackIcon className="size-5" onClick={() => { if (conversionResult.active) navigator.clipboard.writeText(conversionResult.cmyk) }} />
+                    <Square2StackIcon className="colour-copy" onClick={() => { if (conversionResult.active) navigator.clipboard.writeText(conversionResult.cmyk) }} />
                 </div>
             </div>
         </div>
