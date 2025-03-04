@@ -14,7 +14,7 @@ const Lister = () => {
         }
 
         let res = "["
-        const split = input.split(delimiter === "" ? " " : delimiter)
+        const split = input.split(delimiter)
         for (let i = 0; i < split.length; i++) {
             let buffer = ""
             if (!numberMode) buffer += "\""
@@ -37,7 +37,7 @@ const Lister = () => {
                     Lister
                 </div>
                 <div className='w-2/5 border-w rounded-md text-center p-[10px] mt-[10px]'>
-                    Convert a string of characters into a list. The default delimiter is a space but it can be overridden by setting your own in the input below.
+                    Convert a string of characters into a list. The default delimiter is a nothing but it can be overridden by setting your own in the input below.
                 </div>
             </div>
 
