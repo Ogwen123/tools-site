@@ -63,11 +63,15 @@ export const tools: ToolObject = {
         }
     },
     logic: {
-        name: "Logic",
+        name: "Logic and Maths",
         tools: {
             truth_table_generator: {
                 name: "Truth Table Generator",
                 link: "/logic/truth-table-generator"
+            },
+            matrix_inverter: {
+                name: "Matrix Inverter",
+                link: "/logic/matrix-inverter"
             }
         }
     },

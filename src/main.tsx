@@ -32,6 +32,7 @@ import TruthTableGenerator from "./components/routes/logic/TruthTableGenerator";
 import Lister from "./components/routes/string/Lister";
 import MapsVisualiser from "./components/routes/visual/MapsVisualiser";
 import ColourConversions from "./components/routes/conversions/ColourConversions.tsx";
+import MatrixInverter from "./components/routes/logic/MatrixInverter.tsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -59,6 +60,7 @@ const router = createBrowserRouter(
             <Route path="/logic" element={<Template />}>
                 <Route index element={<LogicHome />} />
                 <Route path="/logic/truth-table-generator" element={<TruthTableGenerator />} />
+                <Route path="/logic/matrix-inverter" element={<MatrixInverter />} />
             </Route>
             <Route path="*" element={<NotFound />} />
         </Route>
