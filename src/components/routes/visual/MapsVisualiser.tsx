@@ -199,7 +199,7 @@ const MapsVisualiser = () => {
                                     )
                                 })}
                             </div>
-                            <canvas className='w-[60%]' id="mapCanvas">
+                            <canvas className='' height={500} width={500} id="mapCanvas">
                             </canvas>
                             <div className='w-[20%] flex flex-col h-full justify-evenly items-center'>
                                 {sets.b.map((value, index) => {
