@@ -58,3 +58,5 @@ export type RGB = {
 }
 
 export type IntermediateMatrix = { [key: string]: string }
+
+export type Matrix = number[][]

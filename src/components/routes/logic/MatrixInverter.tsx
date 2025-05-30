@@ -1,18 +1,57 @@
 import React from 'react'
-import { _Alert, IntermediateMatrix } from '../../../global/types'
+import { _Alert, IntermediateMatrix, Matrix } from '../../../global/types'
 import Alert, { alertReset } from '../../Alert'
-import { intermediateMatrixToArray } from '../../../utils/maths'
+import { intermediateMatrixToArray, invertMatrix } from '../../../utils/maths'
 
 const MatrixInverter = () => {
 
     const id = (x: number, y: number) => x + "-" + y
+    const loc = (id: string): [number, number] => [parseInt(id.split("-")[0]), parseInt(id.split("-")[1])]
 
     const [stage, setStage] = React.useState<1 | 2 | 3>(1)
-    const [dimensions, setDimensions] = React.useState<{ n: number, m: number }>({ n: 2, m: 2 })
+    const [dimensions, setDimensions] = React.useState<number>(2)
     const [intermediateMatrix, setIntermediateMatrix] = React.useState<IntermediateMatrix>({})
     const [matrixInputErrors, setMatrixInputErrors] = React.useState<string[]>([])
     const [alert, setAlert] = React.useState<_Alert>(["Alert", "ERROR", false])
-    const [matrix, setMatrix] = React.useState<number[][]>()
+    const [matrix, setMatrix] = React.useState<Matrix>()
+    const [inverseSteps, setInverseSteps] = React.useState<Matrix[]>()
+    const [invertible, setInvertible] = React.useState<boolean>(true)
+
+    React.useEffect(() => {
+        if (matrix === undefined) return
+
+        const inverted = invertMatrix(matrix)
+
+        if (inverted === false) {
+            setInvertible(false)
+        } else {
+            setInverseSteps(inverted)
+        }
+
+    }, [matrix])
+
+    React.useEffect(() => {
+        if (Object.keys(intermediateMatrix).length === 0) return
+
+        setIntermediateMatrix((prev) => { // remove any entires from the intermediate matrix that do not fit in the new dimensions
+            const filtered = Object.entries(prev).filter(([key, _]) => {
+                const [x, y] = loc(key)
+
+                if (x >= dimensions || y >= dimensions) {
+                    return false
+                } else {
+                    return true
+                }
+            })
+
+            const obj: IntermediateMatrix = {}
+            filtered.forEach((val: [string, string]) => {
+                obj[val[0]] = val[1]
+            })
+
+            return obj
+        })
+    }, [dimensions])
 
     return (
         <div className='flex fc flex-col'>
@@ -27,7 +66,7 @@ const MatrixInverter = () => {
                 width="40%"
             />
             <div className='w-2/5 border-w rounded-md text-center p-[10px] mt-[10px]'>
-                Invert Matrices
+                Invert matrices using reduced row echelon form.
             </div>
             <div className='w-[455px]'>
                 <div className='flex flex-row items-center p-[10px]'>
@@ -48,12 +87,8 @@ const MatrixInverter = () => {
                     <div className='flex flex-col '>
                         <div className='flex flex-row mt-[50px] w-[450px] justify-evenly'>
                             <div className='flex flex-col'>
-                                <div>Rows (m)</div>
-                                <input type='number' min={2} max={10} value={dimensions.m} className='form-input' onChange={(e) => { setDimensions((prev) => ({ n: prev.n, m: e.target.valueAsNumber })) }} />
-                            </div>
-                            <div className='flex flex-col'>
-                                <div>Columns (n)</div>
-                                <input type='number' min={2} max={10} value={dimensions.n} className='form-input' onChange={(e) => { setDimensions((prev) => ({ m: prev.m, n: e.target.valueAsNumber })) }} />
+                                <div>Size</div>
+                                <input type='number' min={2} max={10} value={dimensions} className='form-input' onChange={(e) => { setDimensions(e.target.valueAsNumber) }} />
                             </div>
                         </div>
 
@@ -68,10 +103,10 @@ const MatrixInverter = () => {
                     stage === 2 ?
                         <div className='flex flex-col min-w-[450px]'>
                             <div className='fc flex-col mt-[50px]'>
-                                {Array.from({ length: dimensions.m }, (_, index) => index).map((y) => {
+                                {Array.from({ length: dimensions }, (_, index) => index).map((y) => {
                                     return (
                                         <div key={y} className='flex flex-row my-[5px]'>
-                                            {Array.from({ length: dimensions.n }, (_, index2) => index2).map((x) => {
+                                            {Array.from({ length: dimensions }, (_, index2) => index2).map((x) => {
                                                 return (
                                                     <input
                                                         key={id(x, y)}
@@ -94,7 +129,7 @@ const MatrixInverter = () => {
                             </div>
                             <div className='mt-[50px] flex flex-row w-full'>
                                 <button
-                                    className='button mx-[5px]'
+                                    className='button mx-[5px] bg-warning'
                                     onClick={() => {
                                         setStage(1)
                                     }}
@@ -103,7 +138,8 @@ const MatrixInverter = () => {
                                     className='button mx-[5px]'
                                     onClick={() => {
                                         //validations
-                                        if (Object.keys(intermediateMatrix).length !== (dimensions.n * dimensions.m)) {
+                                        if (Object.keys(intermediateMatrix).length !== (dimensions ** 2)) {
+                                            console.log(intermediateMatrix)
                                             setAlert(["Fill in all the matrix elements to move on.", "ERROR", true])
                                             setTimeout(() => {
                                                 setAlert(alertReset)
@@ -119,8 +155,32 @@ const MatrixInverter = () => {
                             </div>
                         </div>
                         :
-                        <div>
+                        <div className='flex flex-col min-w-[450px]'>
+                            <div>
+                                {inverseSteps === undefined ?
+                                    <div>Loading...</div>
+                                    :
+                                    <div>
+                                        {invertible ?
+                                            <div>
 
+                                            </div>
+                                            :
+                                            <div>
+                                                This matrix is not invertible
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                            <div className='mt-[50px] flex flex-row w-full'>
+                                <button
+                                    className='button mx-[5px] bg-warning'
+                                    onClick={() => {
+                                        setStage(2)
+                                    }}
+                                >Back</button>
+                            </div>
                         </div>
 
 
