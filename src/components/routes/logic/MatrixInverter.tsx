@@ -1,8 +1,9 @@
 import React from 'react'
-import { _Alert, IntermediateMatrix, Matrix as _Matrix, Stage } from '../../../global/types'
+import { _Alert, IntermediateMatrix, Matrix as _Matrix, Stage, SavedMatrix } from '../../../global/types'
 import Alert, { alertReset } from '../../Alert'
-import { intermediateMatrixToArray, invertMatrix } from '../../../utils/maths'
+import { arrayToIntermediateMatrix, intermediateMatrixToArray, invertMatrix } from '../../../utils/maths'
 import Matrix from './matrix inverter/Matrix'
+import { ArrowRightIcon } from '@heroicons/react/20/solid'
 
 const MatrixInverter = () => {
 
@@ -17,6 +18,15 @@ const MatrixInverter = () => {
     const [matrix, setMatrix] = React.useState<_Matrix>()
     const [inverseSteps, setInverseSteps] = React.useState<Stage[]>()
     const [invertible, setInvertible] = React.useState<boolean>(true)
+    const [savedMatrices, setSavedMatrices] = React.useState<SavedMatrix[]>()
+    const [nameInput, setNameInput] = React.useState<boolean>(false)
+
+    React.useEffect(() => {
+        if (localStorage.getItem("saved_matrices") === null) return
+
+        const savedMatrices: SavedMatrix[] = JSON.parse(localStorage.getItem("saved_matrices")!)
+        setSavedMatrices(savedMatrices)
+    }, [])
 
     React.useEffect(() => {
         if (matrix === undefined) return
@@ -53,6 +63,21 @@ const MatrixInverter = () => {
             return obj
         })
     }, [dimensions])
+
+    const saveMatrix = () => {
+        const name = (document.getElementById("name-input") as HTMLInputElement).value
+
+        const value: SavedMatrix = { name: name, matrix: intermediateMatrixToArray(intermediateMatrix) }
+
+        if (localStorage.getItem("saved_matrices") === null) localStorage.setItem("saved_matrices", JSON.stringify([value]))
+        else {
+            const savedMatrices: SavedMatrix[] = JSON.parse(localStorage.getItem("saved_matrices")!)
+            savedMatrices.push(value)
+            localStorage.setItem("saved_matrices", JSON.stringify(savedMatrices))
+        }
+
+        setNameInput(false)
+    }
 
     return (
         <div className='flex fc flex-col'>
@@ -99,6 +124,21 @@ const MatrixInverter = () => {
                                 setStage(2)
                             }}
                         >Next</button>
+                        <div>
+                            <div className='text-lg fc mt-[50px] mb-[10px]'>Saved Matrices</div>
+                            {
+                                savedMatrices?.map((value) => {
+                                    return (
+                                        <div className='bg-bgdark p-[10px] my-[10px] hover:bg-bgdark/75 rounded-lg flex flex-row justify-between items-center group' onClick={() => {
+                                            setStage(2)
+                                            setIntermediateMatrix(arrayToIntermediateMatrix(value.matrix))
+                                        }}>
+                                            {value.name} <ArrowRightIcon className='size-6 group-hover:text-main transition-all group-hover:size-8' />
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
                     :
                     stage === 2 ?
@@ -128,15 +168,29 @@ const MatrixInverter = () => {
                                     )
                                 })}
                             </div>
-                            <div className='mt-[50px] flex flex-row w-full'>
+                            {
+                                nameInput &&
+                                <input placeholder='Name' id="name-input" className='form-input mt-[50px] mb-[-40px]' />
+                            }
+                            <button
+                                className='button mt-[50px]'
+                                onClick={() => {
+                                    if (nameInput === true) {
+                                        saveMatrix()
+                                    } else {
+                                        setNameInput(true)
+                                    }
+                                }}
+                            >Save</button>
+                            <div className='flex flex-row w-full'>
                                 <button
-                                    className='button mx-[5px] bg-warning'
+                                    className='button mr-[5px] bg-warning'
                                     onClick={() => {
                                         setStage(1)
                                     }}
                                 >Back</button>
                                 <button
-                                    className='button mx-[5px]'
+                                    className='button ml-[5px]'
                                     onClick={() => {
                                         //validations
                                         if (Object.keys(intermediateMatrix).length !== (dimensions ** 2)) {
@@ -166,7 +220,7 @@ const MatrixInverter = () => {
                                             <div>
                                                 <Matrix
                                                     matrix={inverseSteps[inverseSteps.length - 1].matrix}
-                                                    altMatrix={inverseSteps[inverseSteps.length - 1].matrix}
+                                                    altMatrix={inverseSteps[inverseSteps.length - 1].altMatrix}
                                                 />
                                             </div>
                                             :

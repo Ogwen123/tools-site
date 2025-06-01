@@ -65,3 +65,8 @@ export type Stage = {
     matrix: Matrix,
     altMatrix: Matrix
 }
+
+export type SavedMatrix = {
+    matrix: Matrix,
+    name: string
+}

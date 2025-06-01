@@ -1,25 +1,27 @@
 import { IntermediateMatrix, Matrix, Stage } from "../global/types"
 
-export const invertMatrix = (matrix: Matrix): Stage[] | false => {
+export const invertMatrix = (matrixRef: Matrix): Stage[] | false => {
+    let matrix = matrixRef
     let stages: Stage[] = []
     let altMatrix: Matrix = matrix.map((row, y) => (row.map((_, x) => x === y ? 1 : 0)))
 
-    stages.push({
+    const temp = {
         matrix: matrix,
         altMatrix: altMatrix
-    })
+    }
 
-    console.log(altMatrix)
+    stages[0] = Object.assign({}, temp)
 
     // TODO
     // add row swapping logic
 
     // row echelon
     for (let loc = 0; loc < matrix.length - 1; loc++) {
+        console.log("loop")
         for (let i = 1; i < matrix.length - loc; i++) {
             const operatorLine = matrix[loc]
             const operandLine = matrix[loc + i]
-            const altOperatorLine = matrix[loc]
+            const altOperatorLine = altMatrix[loc]
             const altOperandLine = altMatrix[loc + i]
 
             const multiplier = operandLine[loc] / operatorLine[loc]
@@ -37,7 +39,7 @@ export const invertMatrix = (matrix: Matrix): Stage[] | false => {
             altMatrix: altMatrix
         })
     }
-
+    console.log(stages)
     // calculate determinant
     let det = 1
     for (let i = 0; i < matrix.length; i++) {
@@ -76,9 +78,22 @@ export const intermediateMatrixToArray = (intermediate: IntermediateMatrix): Mat
     for (let i = 0; i < y; i++) {
         matrix[i] = []
         for (let j = 0; j < x; j++) {
-            matrix[i][j] = parseInt(intermediate[j + "-" + i])
+            const value = intermediate[j + "-" + i] || "0"
+            matrix[i][j] = parseInt(value)
         }
     }
 
     return matrix
+}
+
+export const arrayToIntermediateMatrix = (array: Matrix) => {
+    let intermediate: IntermediateMatrix = {}
+
+    for (let y = 0; y < array.length; y++) {
+        for (let x = 0; x < array[0].length; x++) {
+            intermediate[x + "-" + y] = array[y][x].toString()
+        }
+    }
+
+    return intermediate
 }
