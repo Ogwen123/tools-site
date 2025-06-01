@@ -1,7 +1,8 @@
 import React from 'react'
-import { _Alert, IntermediateMatrix, Matrix } from '../../../global/types'
+import { _Alert, IntermediateMatrix, Matrix as _Matrix, Stage } from '../../../global/types'
 import Alert, { alertReset } from '../../Alert'
 import { intermediateMatrixToArray, invertMatrix } from '../../../utils/maths'
+import Matrix from './matrix inverter/Matrix'
 
 const MatrixInverter = () => {
 
@@ -13,8 +14,8 @@ const MatrixInverter = () => {
     const [intermediateMatrix, setIntermediateMatrix] = React.useState<IntermediateMatrix>({})
     const [matrixInputErrors, setMatrixInputErrors] = React.useState<string[]>([])
     const [alert, setAlert] = React.useState<_Alert>(["Alert", "ERROR", false])
-    const [matrix, setMatrix] = React.useState<Matrix>()
-    const [inverseSteps, setInverseSteps] = React.useState<Matrix[]>()
+    const [matrix, setMatrix] = React.useState<_Matrix>()
+    const [inverseSteps, setInverseSteps] = React.useState<Stage[]>()
     const [invertible, setInvertible] = React.useState<boolean>(true)
 
     React.useEffect(() => {
@@ -163,7 +164,10 @@ const MatrixInverter = () => {
                                     <div>
                                         {invertible ?
                                             <div>
-
+                                                <Matrix
+                                                    matrix={inverseSteps[inverseSteps.length - 1].matrix}
+                                                    altMatrix={inverseSteps[inverseSteps.length - 1].matrix}
+                                                />
                                             </div>
                                             :
                                             <div>

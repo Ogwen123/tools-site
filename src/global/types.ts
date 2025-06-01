@@ -60,3 +60,8 @@ export type RGB = {
 export type IntermediateMatrix = { [key: string]: string }
 
 export type Matrix = number[][]
+
+export type Stage = {
+    matrix: Matrix,
+    altMatrix: Matrix
+}

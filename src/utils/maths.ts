@@ -1,8 +1,13 @@
-import { IntermediateMatrix, Matrix } from "../global/types"
+import { IntermediateMatrix, Matrix, Stage } from "../global/types"
 
-export const invertMatrix = (matrix: Matrix): Matrix[] | false => {
-    let stages: Matrix[] = []
-    let altMatrix = matrix.map((row, y) => (row.map((_, x) => x === y ? 1 : 0)))
+export const invertMatrix = (matrix: Matrix): Stage[] | false => {
+    let stages: Stage[] = []
+    let altMatrix: Matrix = matrix.map((row, y) => (row.map((_, x) => x === y ? 1 : 0)))
+
+    stages.push({
+        matrix: matrix,
+        altMatrix: altMatrix
+    })
 
     console.log(altMatrix)
 
@@ -14,14 +19,23 @@ export const invertMatrix = (matrix: Matrix): Matrix[] | false => {
         for (let i = 1; i < matrix.length - loc; i++) {
             const operatorLine = matrix[loc]
             const operandLine = matrix[loc + i]
+            const altOperatorLine = matrix[loc]
+            const altOperandLine = altMatrix[loc + i]
 
             const multiplier = operandLine[loc] / operatorLine[loc]
 
             for (let j = 0; j < operatorLine.length; j++) {
                 operandLine[j] = operandLine[j] - (operatorLine[j] * multiplier)
+                altOperandLine[j] = altOperandLine[j] - (altOperatorLine[j] * multiplier)
+
             }
             matrix[loc + i] = operandLine
+            altMatrix[loc + i] = altOperandLine
         }
+        stages.push({
+            matrix: matrix,
+            altMatrix: altMatrix
+        })
     }
 
     // calculate determinant
