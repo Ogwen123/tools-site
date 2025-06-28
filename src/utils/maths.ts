@@ -62,14 +62,13 @@ export const invertMatrix = (matrixRef: Matrix): InversionResult | false => {
             matrix[i][j] = matrix[i][j] / div
             altMatrix[i][j] = altMatrix[i][j] / div
         }
-        //console.log(altMatrix)
         for (let j = 0; j < matrix.length; j++) {
             if (j === i) continue
             const scalar = matrix[j][i]
             matrix[j] = subRow(matrix[j], mul(matrix[i], scalar))
             altMatrix[j] = subRow(altMatrix[j], mul(altMatrix[i], scalar))
         }
-        //console.log(altMatrix)
+
         stages.push(dc({
             matrix: matrix,
             altMatrix: altMatrix
@@ -125,10 +124,3 @@ export const arrayToIntermediateMatrix = (array: Matrix) => {
 
     return intermediate
 }
-
-/* old code
-
-// row echelon
-    
-
-*/

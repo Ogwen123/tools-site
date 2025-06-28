@@ -226,13 +226,27 @@ const MatrixInverter = () => {
                                         {invertible ?
                                             <div>
                                                 <div className='mt-[50px]'>
-                                                    <button className='w-full p-[10px] rounded-md bg-bgdark flex flex-row items-center hover:text-main' onClick={() => { setShowStages((prev) => !prev) }}>
+                                                    <button className={'w-full p-[10px] bg-bgdark flex flex-row items-center hover:text-main ' + (showStages ? "rounded-tl-md rounded-tr-md" : "rounded-md")} onClick={() => { setShowStages((prev) => !prev) }}>
                                                         {showStages ? <ChevronDownIcon className='size-5' /> : <ChevronRightIcon className='size-5' />}   Stages
                                                     </button>
                                                     {showStages &&
-                                                        <div className='w-full'>
+                                                        <div className='w-full p-[10px] rounded-bl-md rounded-br-md bg-bgdark flex flex-col items-center'>
                                                             {
-
+                                                                inverseSteps.map((val, index) => {
+                                                                    return (
+                                                                        <div
+                                                                            key={"matrix" + index}
+                                                                            className='mt-[10px]'
+                                                                        >
+                                                                            Step {index + 1}
+                                                                            <Matrix
+                                                                                matrix={val.matrix}
+                                                                                altMatrix={val.altMatrix}
+                                                                                classname='mt-[5px]'
+                                                                            />
+                                                                        </div>
+                                                                    )
+                                                                })
                                                             }
                                                         </div>
                                                     }
