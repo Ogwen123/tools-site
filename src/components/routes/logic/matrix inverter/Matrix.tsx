@@ -3,7 +3,8 @@ import { Matrix as _Matrix } from '../../../../global/types'
 
 interface MatrixInterface {
     matrix: _Matrix,
-    altMatrix?: _Matrix
+    altMatrix?: _Matrix,
+    classname?: string
 }
 
 interface MatrixCompInterface {
@@ -15,7 +16,7 @@ interface MatrixCompInterface {
     sharpSide?: "L" | "R" | "N"
 }
 
-const Matrix = ({ matrix, altMatrix }: MatrixInterface) => {
+const Matrix = ({ matrix, altMatrix, classname = "" }: MatrixInterface) => {
 
     const [valid, setValid] = React.useState<boolean>(true)
 
@@ -35,7 +36,7 @@ const Matrix = ({ matrix, altMatrix }: MatrixInterface) => {
         <div>
             {
                 valid ?
-                    <div className='mt-[50px]'>
+                    <div className={classname}>
                         {
                             !altMatrix ?
                                 <MatrixComp matrix={matrix} />

@@ -1,57 +1,85 @@
-import { IntermediateMatrix, Matrix, Stage } from "../global/types"
+import { IntermediateMatrix, InversionResult, Matrix, Stage, Row } from "../global/types"
 
-export const invertMatrix = (matrixRef: Matrix): Stage[] | false => {
-    let matrix = matrixRef
-    let stages: Stage[] = []
-    let altMatrix: Matrix = matrix.map((row, y) => (row.map((_, x) => x === y ? 1 : 0)))
+const dc = (item: any) => JSON.parse(JSON.stringify(item))
 
-    const temp = {
-        matrix: matrix,
-        altMatrix: altMatrix
-    }
+const mul = (row: Row, scalar: number) => row.map((x) => x * scalar)
 
-    stages[0] = Object.assign({}, temp)
+const determinant = (matrix: Matrix) => {
+    for (let i = 0; i < matrix.length - 1; i++) {
+        for (let j = i + 1; j < matrix.length; j++) {
+            if (j === i) continue
 
-    // TODO
-    // add row swapping logic
-
-    // row echelon
-    for (let loc = 0; loc < matrix.length - 1; loc++) {
-        console.log("loop")
-        for (let i = 1; i < matrix.length - loc; i++) {
-            const operatorLine = matrix[loc]
-            const operandLine = matrix[loc + i]
-            const altOperatorLine = altMatrix[loc]
-            const altOperandLine = altMatrix[loc + i]
-
-            const multiplier = operandLine[loc] / operatorLine[loc]
-
-            for (let j = 0; j < operatorLine.length; j++) {
-                operandLine[j] = operandLine[j] - (operatorLine[j] * multiplier)
-                altOperandLine[j] = altOperandLine[j] - (altOperatorLine[j] * multiplier)
-
-            }
-            matrix[loc + i] = operandLine
-            altMatrix[loc + i] = altOperandLine
+            matrix[j] = subRow(matrix[j], mul(matrix[i], matrix[j][i] / matrix[i][i]))
         }
-        stages.push({
-            matrix: matrix,
-            altMatrix: altMatrix
-        })
     }
-    console.log(stages)
-    // calculate determinant
     let det = 1
     for (let i = 0; i < matrix.length; i++) {
         det *= matrix[i][i]
     }
 
+    return det
+}
+
+const isZeroRow = (row: Row) => {
+    for (let num of row) {
+        if (num !== 0) return false
+    }
+
+    return true
+}
+
+const subRow = (r1: Row, r2: Row) => {
+    return [r1[0] - r2[0], r1[1] - r2[1], r1[2] - r2[2]]
+}
+
+export const invertMatrix = (matrixRef: Matrix): InversionResult | false => {
+    let det = determinant(dc(matrixRef))
+
     if (det === 0) return false
 
-    // reduced row echelon
-    console.log(det)
-    console.log(matrix)
-    return stages
+    let matrix: Matrix = dc(matrixRef)
+    let stages: Stage[] = []
+    let altMatrix: Matrix = matrix.map((row, y) => (row.map((_, x) => x === y ? 1 : 0)))
+
+    stages[0] = dc({ // assign value not reference
+        matrix: matrix,
+        altMatrix: altMatrix
+    })
+
+    //console.log(stages)
+
+    // gauss jordan elimination
+    // check for any zero rows
+    for (let i = 0; i < matrix.length; i++) {
+        if (isZeroRow(matrix[i])) {
+            return false
+        }
+    }
+
+    for (let i = 0; i < matrix.length; i++) {
+        let div = matrix[i][i]
+        for (let j = 0; j < matrix.length; j++) {
+            matrix[i][j] = matrix[i][j] / div
+            altMatrix[i][j] = altMatrix[i][j] / div
+        }
+        //console.log(altMatrix)
+        for (let j = 0; j < matrix.length; j++) {
+            if (j === i) continue
+            const scalar = matrix[j][i]
+            matrix[j] = subRow(matrix[j], mul(matrix[i], scalar))
+            altMatrix[j] = subRow(altMatrix[j], mul(altMatrix[i], scalar))
+        }
+        //console.log(altMatrix)
+        stages.push(dc({
+            matrix: matrix,
+            altMatrix: altMatrix
+        }))
+    }
+
+    return {
+        stages,
+        det
+    }
 }
 
 export const intermediateMatrixToArray = (intermediate: IntermediateMatrix): Matrix => {
@@ -97,3 +125,10 @@ export const arrayToIntermediateMatrix = (array: Matrix) => {
 
     return intermediate
 }
+
+/* old code
+
+// row echelon
+    
+
+*/

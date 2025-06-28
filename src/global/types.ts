@@ -59,7 +59,9 @@ export type RGB = {
 
 export type IntermediateMatrix = { [key: string]: string }
 
-export type Matrix = number[][]
+export type Row = number[]
+
+export type Matrix = Row[]
 
 export type Stage = {
     matrix: Matrix,
@@ -69,4 +71,9 @@ export type Stage = {
 export type SavedMatrix = {
     matrix: Matrix,
     name: string
+}
+
+export type InversionResult = {
+    det: number,
+    stages: Stage[]
 }

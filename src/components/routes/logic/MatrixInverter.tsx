@@ -3,7 +3,7 @@ import { _Alert, IntermediateMatrix, Matrix as _Matrix, Stage, SavedMatrix } fro
 import Alert, { alertReset } from '../../Alert'
 import { arrayToIntermediateMatrix, intermediateMatrixToArray, invertMatrix } from '../../../utils/maths'
 import Matrix from './matrix inverter/Matrix'
-import { ArrowRightIcon } from '@heroicons/react/20/solid'
+import { ArrowRightIcon, ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 
 const MatrixInverter = () => {
 
@@ -18,8 +18,10 @@ const MatrixInverter = () => {
     const [matrix, setMatrix] = React.useState<_Matrix>()
     const [inverseSteps, setInverseSteps] = React.useState<Stage[]>()
     const [invertible, setInvertible] = React.useState<boolean>(true)
+    const [determinant, setDeterminant] = React.useState<number>()
     const [savedMatrices, setSavedMatrices] = React.useState<SavedMatrix[]>()
     const [nameInput, setNameInput] = React.useState<boolean>(false)
+    const [showStages, setShowStages] = React.useState<boolean>(false)
 
     React.useEffect(() => {
         if (localStorage.getItem("saved_matrices") === null) return
@@ -35,8 +37,10 @@ const MatrixInverter = () => {
 
         if (inverted === false) {
             setInvertible(false)
+            setInverseSteps([])
         } else {
-            setInverseSteps(inverted)
+            setInverseSteps(inverted.stages)
+            setDeterminant(inverted.det)
         }
 
     }, [matrix])
@@ -127,12 +131,17 @@ const MatrixInverter = () => {
                         <div>
                             <div className='text-lg fc mt-[50px] mb-[10px]'>Saved Matrices</div>
                             {
-                                savedMatrices?.map((value) => {
+                                savedMatrices?.map((value, index) => {
                                     return (
-                                        <div className='bg-bgdark p-[10px] my-[10px] hover:bg-bgdark/75 rounded-lg flex flex-row justify-between items-center group' onClick={() => {
-                                            setStage(2)
-                                            setIntermediateMatrix(arrayToIntermediateMatrix(value.matrix))
-                                        }}>
+                                        <div
+                                            key={index}
+                                            className='bg-bgdark p-[10px] my-[10px] hover:bg-bgdark/75 rounded-md flex flex-row justify-between items-center group'
+                                            onClick={() => {
+                                                setStage(2)
+                                                setIntermediateMatrix(arrayToIntermediateMatrix(value.matrix))
+                                                setDimensions(value.matrix.length)
+                                            }}
+                                        >
                                             {value.name} <ArrowRightIcon className='size-6 group-hover:text-main transition-all group-hover:size-8' />
                                         </div>
                                     )
@@ -194,19 +203,17 @@ const MatrixInverter = () => {
                                     onClick={() => {
                                         //validations
                                         if (Object.keys(intermediateMatrix).length !== (dimensions ** 2)) {
-                                            console.log(intermediateMatrix)
                                             setAlert(["Fill in all the matrix elements to move on.", "ERROR", true])
                                             setTimeout(() => {
                                                 setAlert(alertReset)
                                             }, 5000)
                                             return
                                         }
-
                                         // next stage
                                         setMatrix(intermediateMatrixToArray(intermediateMatrix))
                                         setStage(3)
                                     }}
-                                >Next</button>
+                                >Solve</button>
                             </div>
                         </div>
                         :
@@ -218,14 +225,29 @@ const MatrixInverter = () => {
                                     <div>
                                         {invertible ?
                                             <div>
+                                                <div className='mt-[50px]'>
+                                                    <button className='w-full p-[10px] rounded-md bg-bgdark flex flex-row items-center hover:text-main' onClick={() => { setShowStages((prev) => !prev) }}>
+                                                        {showStages ? <ChevronDownIcon className='size-5' /> : <ChevronRightIcon className='size-5' />}   Stages
+                                                    </button>
+                                                    {showStages &&
+                                                        <div className='w-full'>
+                                                            {
+
+                                                            }
+                                                        </div>
+                                                    }
+                                                </div>
+                                                <div className='mt-[10px] text-center'>
+                                                    Determinant: {determinant}
+                                                </div>
                                                 <Matrix
-                                                    matrix={inverseSteps[inverseSteps.length - 1].matrix}
-                                                    altMatrix={inverseSteps[inverseSteps.length - 1].altMatrix}
+                                                    matrix={inverseSteps[inverseSteps.length - 1].altMatrix}
+                                                    classname='mt-[10px]'
                                                 />
                                             </div>
                                             :
-                                            <div>
-                                                This matrix is not invertible
+                                            <div className='fc text-lg mt-[40px]'>
+                                                This matrix is not invertible. (Determinant is 0)
                                             </div>
                                         }
                                     </div>
